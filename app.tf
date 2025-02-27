@@ -21,5 +21,5 @@ module "vpc" {
   
   tags = {
     Name = "MoS-VPC"
- i}
+ }
 }
