@@ -8,7 +8,7 @@ resource "aws_vpc" "main-vpc" {
 
  resource "aws_subnet" "public_subnet-1" {
   vpc_id                     = aws_vpc.main-vpc.id
-  cidr_block                 = cidrsubnet(aws_vpc.main-vpc.cidr_block, 4,1)
+  cidr_block                 = cidrsubnet(aws_vpc.main-vpc.cidr_block, 4, 0)
   availability_zone          = "us-west-2a"
 
   tags = {
@@ -16,9 +16,21 @@ resource "aws_vpc" "main-vpc" {
   }
 }
 
+#add second public subnet in a different AZ for failover, redundancy
+
+resource "aws_subnet" "public_subnet-2" {
+  vpc_id                    = aws_vpc.main-vpc.id
+  cidr_block                = cidrsubnet(aws_vpc.main-vpc.cidr_block,4,2)
+  availability_zone         = "us-west-2b"
+
+  tags = {
+    Name = "MoS-public_SN-us-west-2b"
+ }
+}
+
 resource "aws_subnet" "private_subnet-1" {
   vpc_id                    = aws_vpc.main-vpc.id
-  cidr_block                = cidrsubnet(aws_vpc.main-vpc.cidr_block, 4,2)
+  cidr_block                = cidrsubnet(aws_vpc.main-vpc.cidr_block, 4,1)
   availability_zone         = "us-west-2a"
 
   tags = {
@@ -52,3 +64,5 @@ resource "aws_route_table_association" "public-subnet-association" {
   subnet_id                 = aws_subnet.public_subnet-1.id
   route_table_id            = aws_route_table.public-route-table.id
 }
+
+
