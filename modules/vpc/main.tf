@@ -46,3 +46,9 @@ resource "aws_route_table" "public-route-table" {
       Name = "MoS-public-RT"
   }
 }
+
+# associate the public RT to the public subnet
+resource "aws_route_table_association" "public-subnet-association" {
+  subnet_id                 = aws_subnet.public_subnet-1.id
+  route_table_id            = aws_route_table.public-route-table.id
+}
