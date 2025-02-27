@@ -60,9 +60,13 @@ resource "aws_route_table" "public-route-table" {
 }
 
 # associate the public RT to the public subnet
-resource "aws_route_table_association" "public-subnet-association" {
+resource "aws_route_table_association" "public-subnet-association-1" {
   subnet_id                 = aws_subnet.public_subnet-1.id
   route_table_id            = aws_route_table.public-route-table.id
 }
 
-
+# associate second public SN with public RT for IGW access
+resource "aws_route_table_association" "public-subnet-association-2" {
+  subnet_id                 = aws_subnet.public_subnet-2.id
+  route_table_id            = aws_route_table.public-route-table.id
+}
