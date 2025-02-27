@@ -12,3 +12,5 @@ Using Terraform, created the following in order:
 - Still within that VPC, created an Internet Gateway and attached it to the VPC. This gives the resources within that VPC access to the internet
 - Next, created a route table that is associated with the public subnets. Routes pointing to the IGW was created, so that resources within the public subnet could access the IGW
 - created second AZ, with a public subnet within it, and associated the public SN with the public RT too
+- created ec2, vpc, security-groups, rds modules for organization and modularity
+- created public security group with ports 22 and 80 ingress, open egress
