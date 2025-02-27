@@ -33,3 +33,16 @@ resource "aws_internet_gateway" "MoS-IGW" {
     Name = "Mos-main-VPC-IGW"
   }
 }
+
+resource "aws_route_table" "public-route-table" {
+  vpc_id                    = aws_vpc.main-vpc.id
+  
+  route {
+    cidr_block              = "0.0.0.0/0"
+    gateway_id              = aws_internet_gateway.MoS-IGW.id
+   }
+
+    tags = {
+      Name = "MoS-public-RT"
+  }
+}
