@@ -11,3 +11,4 @@ Using Terraform, created the following in order:
 - next, created a public and private subnet within a single Availability Zone (AZ)
 - Still within that VPC, created an Internet Gateway and attached it to the VPC. This gives the resources within that VPC access to the internet
 - Next, created a route table that is associated with the public subnets. Routes pointing to the IGW was created, so that resources within the public subnet could access the IGW
+- created second AZ, with a public subnet within it, and associated the public SN with the public RT too
