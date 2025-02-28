@@ -38,6 +38,18 @@ resource "aws_subnet" "private_subnet-1" {
   }
 }
 
+resource "aws_subnet" "private-subnet-2" {
+  vpc_id     = aws_vpc.main-vpc.id
+  cidr_block = cidrsubnet(aws_vpc.main-vpc.cidr_block, 4, 3) #10.16.48.0/2
+
+  availability_zone       = "us-west-2b"             
+  map_public_ip_on_launch = false
+
+  #add custom tags
+  tags = {
+    Name = "Mos-private-SN-us-west-2b"  
+  }
+}
 resource "aws_internet_gateway" "MoS-IGW" {
   vpc_id = aws_vpc.main-vpc.id
 
